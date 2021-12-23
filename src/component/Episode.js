@@ -2,7 +2,7 @@ import React from 'react';
 
 
 function Episode({ episode }) {
-  console.log(episode.characters)
+  
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
       <div className="card">

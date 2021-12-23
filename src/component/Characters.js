@@ -12,9 +12,9 @@ function Characters() {
   });
 
   const handleName = (e) => {
-    name.name = e.target.value
-    console.log(name, 'uno');
-    setName({...name});
+    let a = {}
+    a.name = e.target.value
+    setName({...a});
   };
   if (error) {
     try {
