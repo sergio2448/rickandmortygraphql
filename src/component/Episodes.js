@@ -40,6 +40,7 @@ function Episodes() {
          />
       </div>
 
+
       <div className="row">
         {data &&
           data.episodes.results.map((episode) => (
