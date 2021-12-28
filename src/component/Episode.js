@@ -2,9 +2,7 @@ import React from "react";
 import { Carousel } from "react-bootstrap";
 
 function Episode({ episode }) {
-  console.log("1", episode.name);
   const fourimg = episode.characters.map((images) => images.image).slice(5, 9);
-  console.log("2", fourimg);
 
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-4">

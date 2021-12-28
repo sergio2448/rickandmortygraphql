@@ -20,7 +20,7 @@ function Characters() {
     try {
       return <p>Error: {error.networkError.result.errors[0].message}</p>;
     } catch (error) {
-      return <p>No results</p>;
+      error.networkError = [];
     }
   }
 
@@ -36,7 +36,9 @@ function Characters() {
       />
 
       <h2 className="my-5 text-center">
-        {data ? `${data.characters.info.count} records found` : ""}
+        {data
+          ? `${data.characters.info.count} records found`
+          : "0 records found"}
       </h2>
 
       <div className="row">

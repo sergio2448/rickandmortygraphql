@@ -7,12 +7,6 @@ export default function NavBar() {
     <Navbar bg="primary" expand="md" sticky="top">
       <Navbar.Brand>
         <Link className="navbar-brand my-5" to="/">
-          {/* <img
-            src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/89371755883023.5996f8afa30d8.jpg"
-            alt="icono"
-            id="img"
-            className="mx-2"
-          /> */}
           Rick and Morty
         </Link>
       </Navbar.Brand>
