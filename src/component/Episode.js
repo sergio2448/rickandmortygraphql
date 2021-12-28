@@ -1,46 +1,35 @@
-import React from 'react';
-
+import React from "react";
+import { Carousel } from "react-bootstrap";
 
 function Episode({ episode }) {
-  
+  console.log("1", episode.name);
+  const fourimg = episode.characters.map((images) => images.image).slice(5, 9);
+  console.log("2", fourimg);
+
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
       <div className="card">
-      <div class="container">
-          <div class="row">
-            <div class="col">
-              <img
-                className="card-img-top"
-                src={episode.characters[6].image}
-                alt={episode.name}
-              />
-            </div>
-            <div class="col">
-              <img
-                className="card-img-top"
-                src={episode.characters[7].image}
-                alt={episode.name}
-              />
-            </div>
-            <div class="w-100"></div>
-            <div class="col">
-              <img
-                className="card-img-top"
-                src={episode.characters[8].image}
-                alt={episode.name}
-              />
-            </div>
-            <div class="col">
-              <img
-                className="card-img-top"
-                src={episode.characters[9].image}
-                alt={episode.name}
-              />
-            </div>
-          </div>
-        </div>
+        <Carousel
+          id="carousel"
+          className="carousel-fade"
+          autoPlay={true}
+          controls={false}
+          indicators={true}
+        >
+          <Carousel.Item interval={5000}>
+            <img className="d-block w-100" src={fourimg[0]} alt="" />
+          </Carousel.Item>
+          <Carousel.Item interval={5000}>
+            <img className="d-block w-100" src={fourimg[1]} alt="" />
+          </Carousel.Item>
+          <Carousel.Item interval={5000}>
+            <img className="d-block w-100" src={fourimg[2]} alt="" />
+          </Carousel.Item>
+          <Carousel.Item interval={5000}>
+            <img className="d-block w-100" src={fourimg[3]} alt="" />
+          </Carousel.Item>
+        </Carousel>
         <div className="card-body">
-
           <div className="text-truncate">
             <strong>Episode:</strong> {episode.name}
           </div>

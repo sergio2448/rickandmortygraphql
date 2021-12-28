@@ -1,45 +1,44 @@
-import { useQuery } from '@apollo/client';
-import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import Episode from './Episode';
-import { EPISODES } from '../queries';
+import { useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import ReactPaginate from "react-paginate";
+import Episode from "./Episode";
+import { gql } from "@apollo/client";
 
 function Episodes() {
   const [page, setPage] = useState(1);
-  const [name, setName] = useState({name:""})
+  const [name, setName] = useState({ name: "" });
   const { error, data } = useQuery(EPISODES, {
     variables: { page: page, filter: name },
   });
 
-  const handleName = (e) => {
-    let a = {}
-    a.name = e.target.value
-    setName({...a});
+  const handleName = (event) => {
+    let filterEpisode = {};
+    filterEpisode.name = event.target.value;
+    setName({ ...filterEpisode });
   };
 
   if (error) {
     try {
-      return <p>Error: {error.networkError.result.errors[0].message}</p>;  
-        } catch (error) {
+      return <p>Error: {error.networkError.result.errors[0].message}</p>;
+    } catch (error) {
       return <p>No results</p>;
-        }
+    }
   }
 
   return (
     <div className="container">
-      <h2 className="my-5 text-center">
-        {data ? `${data.episodes.info.count} records found` : ''}
-      </h2>
-      <div class="form-group">
-        <input class="form-control mr-sm-2"
-               type="search"
-               placeholder="Search Character"
-               aria-label="Search"
-               value={name.name}
-               onChange={handleName}
-         />
-      </div>
+      <input
+        class="mr-sm-2 mt-sm-4"
+        type="search"
+        placeholder="Search Episode"
+        aria-label="Search"
+        value={name.name}
+        onChange={handleName}
+      />
 
+      <h2 className="my-5 text-center">
+        {data ? `${data.episodes.info.count} records found` : ""}
+      </h2>
 
       <div className="row">
         {data &&
@@ -73,3 +72,23 @@ function Episodes() {
 }
 
 export default Episodes;
+
+const EPISODES = gql`
+  query allepisodes($page: Int, $filter: FilterEpisode) {
+    episodes(page: $page, filter: $filter) {
+      info {
+        count
+        pages
+      }
+      results {
+        id
+        name
+        air_date
+        characters {
+          id
+          image
+        }
+      }
+    }
+  }
+`;

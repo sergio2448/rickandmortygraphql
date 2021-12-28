@@ -1,42 +1,43 @@
-import { useQuery } from '@apollo/client';
-import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import Character from './Character';
-import { CHARACTERS } from '../queries';
+import { useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import ReactPaginate from "react-paginate";
+import Character from "./Character";
+import { gql } from "@apollo/client";
 
 function Characters() {
   const [page, setPage] = useState(1);
-  const [name, setName] = useState({name:""}) //name = {name: ""}
+  const [name, setName] = useState({ name: "" }); //name = {name: ""}
   const { error, data } = useQuery(CHARACTERS, {
-    variables: { page: page, filter: name }
+    variables: { page: page, filter: name },
   });
 
-  const handleName = (e) => {
-    let a = {}
-    a.name = e.target.value
-    setName({...a});
+  const handleName = (event) => {
+    let filterCharacter = {};
+    filterCharacter.name = event.target.value;
+    setName({ ...filterCharacter });
   };
   if (error) {
     try {
-      return <p>Error: {error.networkError.result.errors[0].message}</p>;  
-        } catch (error) {
+      return <p>Error: {error.networkError.result.errors[0].message}</p>;
+    } catch (error) {
       return <p>No results</p>;
-        }
+    }
   }
 
   return (
     <div className="container">
-      <h2 className="my-5 text-center">
-        {data ? `${data.characters.info.count} records found` : ''}
-      </h2>
+      <input
+        class="mr-sm-2 mt-sm-4"
+        type="search"
+        placeholder="Search Character"
+        aria-label="Search"
+        value={name.name}
+        onChange={handleName}
+      />
 
-                <input class="form-control mr-sm-2" 
-                       type="search"
-                       placeholder="Search Character" 
-                       aria-label="Search"
-                       value={name.name}
-                       onChange={handleName}
-                />
+      <h2 className="my-5 text-center">
+        {data ? `${data.characters.info.count} records found` : ""}
+      </h2>
 
       <div className="row">
         {data &&
@@ -71,3 +72,23 @@ function Characters() {
 
 export default Characters;
 
+const CHARACTERS = gql`
+  query characters($page: Int, $filter: FilterCharacter) {
+    characters(page: $page, filter: $filter) {
+      info {
+        count
+        pages
+      }
+      results {
+        id
+        image
+        name
+        species
+        location {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
