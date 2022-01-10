@@ -1,6 +1,6 @@
 import React from "react";
 
-function Character({ character }) {
+function Character({ character, addToCartCharacters }) {
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
       <div className="card">
@@ -17,9 +17,14 @@ function Character({ character }) {
           <div className="text-truncate">
             <strong>Location:</strong> {character.location.name}
           </div>
-          <button type="button" className="btn btn-primary w-100 mt-2">
+          <button onClick={() => addToCartCharacters(character.id)} type="button" className="btn btn-primary w-100 mt-2">
             Add
           </button>
+          <input
+            type="number"
+            value="0"
+            className="btn btn-primary w-100 mt-1"
+          ></input>
         </div>
       </div>
     </div>
