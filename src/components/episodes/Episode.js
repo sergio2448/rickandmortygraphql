@@ -1,7 +1,12 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 
-function Episode({ episode, addToCartEpisodes }) {
+function Episode({
+  episode,
+  addToCartEpisodes,
+  delFromCartEpisodes,
+  removeButton = false,
+}) {
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
       <div className="card">
@@ -31,14 +36,24 @@ function Episode({ episode, addToCartEpisodes }) {
           <div className="text-truncate">
             <strong>Air date:</strong> {episode.air_date}
           </div>
-          <button onClick={() => addToCartEpisodes(episode.id)} type="button" className="btn btn-primary w-100 mt-2">
-            Add
-          </button>
           <input
             type="number"
-            value="0"
+            placeholder="Amount (1-20)"
+            min="1"
+            max="20"
             className="btn btn-primary w-100 mt-1"
           ></input>
+          <button
+            onClick={
+              removeButton
+                ? () => delFromCartEpisodes(episode.id)
+                : () => addToCartEpisodes(episode.id)
+            }
+            type="button"
+            className="btn btn-primary w-100 mt-2"
+          >
+            {removeButton ? "Remove" : "Add"}
+          </button>
         </div>
       </div>
     </div>

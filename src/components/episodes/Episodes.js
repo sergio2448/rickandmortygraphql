@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { /* useSelector, */ useDispatch } from "react-redux";
 import { addToCartEpisodes, getEpisodes } from "../../actions/shoppingAction";
 import Pagination from "../common/Pagination";
 import Search from "../common/Search";
@@ -13,14 +13,13 @@ function Episodes() {
   const { error, data } = useQuery(EPISODES, {
     variables: { page: page, filter: filter },
   });
-  const state1 = useSelector((state) => state.productsEpisodes);
-  const state2 = useSelector((state) => state.cartEpisodes);
+  //const state = useSelector(state => state);
+  //console.log('state', state)
   const dispatch = useDispatch();
-  console.log("productsEpisodes", state1);
-  console.log("cartEpisodes", state2);
+
   useEffect(() => {
     setTimeout(() => {
-      console.log("Entrando en el useEffecty el Timeout", data);
+      /* console.log("Entrando en el useEffect y el Timeout", data); */
       dispatch(getEpisodes(data));
     }, 5000);
   }, [data]);

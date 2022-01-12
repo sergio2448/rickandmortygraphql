@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import Episodes from "./components/episodes/Episodes";
 import Characters from "./components/characters/Characters";
 import NavBar from "./components/common/NavBar";
-import ShoppingCart from "./components/ShoppingCart";
+import ShoppingCart from "./components/cart/ShoppingCart";
 import { Provider } from "react-redux";
 import store from "./store";
 

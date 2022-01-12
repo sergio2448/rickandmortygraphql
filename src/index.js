@@ -11,10 +11,10 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ApolloProvider>,
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ApolloProvider>,
   document.getElementById("root")
 );

@@ -1,6 +1,11 @@
 import React from "react";
 
-function Character({ character, addToCartCharacters }) {
+function Character({
+  character,
+  addToCartCharacters,
+  delFromCartCharacters,
+  removeButton = false,
+}) {
   return (
     <div className="col-lg-3 col-md-6 col-sm-12 mb-4">
       <div className="card">
@@ -17,14 +22,24 @@ function Character({ character, addToCartCharacters }) {
           <div className="text-truncate">
             <strong>Location:</strong> {character.location.name}
           </div>
-          <button onClick={() => addToCartCharacters(character.id)} type="button" className="btn btn-primary w-100 mt-2">
-            Add
-          </button>
           <input
             type="number"
-            value="0"
+            placeholder="Amount (1-20)"
+            min="1"
+            max="20"
             className="btn btn-primary w-100 mt-1"
           ></input>
+          <button
+            onClick={
+              removeButton
+                ? () => delFromCartCharacters(character.id)
+                : () => addToCartCharacters(character.id)
+            }
+            type="button"
+            className="btn btn-primary w-100 mt-2"
+          >
+            {removeButton ? "Remove" : "Add"}
+          </button>
         </div>
       </div>
     </div>
